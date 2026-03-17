@@ -1,18 +1,18 @@
-// prisma/schema.prisma
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL") // variável de ambiente obrigatória
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
 }
 
 model Url {
   id          Int      @id @default(autoincrement())
   originalUrl String
   shortCode   String   @unique
-  clicks      Int      @default(0) // Contador de cliques
+  clicks      Int      @default(0)
+  rateLimit   Int?     // máximo de cliques permitidos
+  expiry      DateTime? // expiração da URL
   createdAt   DateTime @default(now())
-  expiresAt   DateTime? // Data de expiração opcional
 }
