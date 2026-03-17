@@ -12,7 +12,8 @@ model Url {
   originalUrl String
   shortCode   String   @unique
   clicks      Int      @default(0)
-  rateLimit   Int?     // máximo de cliques permitidos
-  expiry      DateTime? // expiração da URL
   createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt @default(now()) // adiciona default
+  rateLimit   Int?
+  expiry      DateTime?
 }
